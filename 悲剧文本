@@ -1,0 +1,81 @@
+/*悲剧文本 [ home , ] end
+
+
+	思路：用数组插入不大方便，链表不错
+		  判断[]
+		  头部插入
+		  临时尾部返回头部开始（tep）
+		  链表增添元素
+
+
+*/
+#include<iostream>
+#include<cstdio>
+using namespace std;
+struct M {
+	char a;
+	M* next;
+};
+int main()
+{
+	int q = 0;
+	M* head, * tail, * p, * tep;
+	head = new M;
+	tail = head;
+	tep = tail;
+	tail->next = NULL;
+	p = new M;
+	char b='0';
+	while (cin >> b)
+	{
+		
+		if (b == '!') break;
+
+		
+		if (b == '[')
+		{
+			tep = head;
+			continue;
+
+
+		}
+		if (b == ']')
+		{
+
+			tep = tail;
+			continue;
+		}
+		else {
+			if (tep->next == NULL)
+			{
+				p = new M;
+				tail->next = p;
+				tail = p;
+				tep = p;
+				p->next = NULL;
+				p->a=b;
+			}
+			else {
+				p = new M;                         //链表增添元素
+				
+				p->next=tep->next;
+
+				tep->next = p;
+				tep = p;
+				p->a = b;
+				
+
+			}
+			
+
+
+		}
+
+	}
+	p = head->next;
+	while (p!= NULL)
+	{
+		cout << p->a;
+		p = p->next;
+	}
+}

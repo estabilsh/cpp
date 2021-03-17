@@ -1,0 +1,67 @@
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+struct ABC
+{
+	vector<int> ac;
+};
+ABC enter(string a )
+{
+	ABC b;
+	int c, length = a.size();
+	for (int i = 0; i < length; i++)
+	{
+		int end = length-i;
+		int start = max(0, end - 1);
+		sscanf_s(a.substr(start, 1).c_str(), "%d", &c);
+		b.ac.push_back(c);
+
+	}
+	return b;
+	
+}
+
+int main()
+{
+	ABC ao, bo,co;
+	string a, b;
+	cin >> a;
+	cin >> b;
+	ao = enter(a);
+	bo = enter(b);
+	for (int g = 0, h = 0;; h++)
+	{
+		if (g == 0 && h >= ao.ac.size() && h >= bo.ac.size()) break;
+		int x = g;
+		
+		if (h < ao.ac.size()) x+= ao.ac[h];
+		if (h < bo.ac.size())
+		{
+			x -= bo.ac[h];
+			if (x<0)
+			{
+				x += bo.ac[h];
+				ao.ac[h + 1] -= 1;
+				x = x + 10 - bo.ac[h];
+			}
+
+		}
+		co.ac.push_back(x % 10);
+		g = x / 10;
+	}
+	if (co.ac[co.ac.size() - 1] != 0) cout << co.ac[co.ac.size() - 1];
+	for (int p = co.ac.size()-2;p>=0; p--)
+	{
+		
+		cout << co.ac[p];
+		
+		
+
+	}
+	
+
+	
+
+	
+}

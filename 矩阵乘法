@@ -1,0 +1,84 @@
+/*
+	思路：要有A行==B列的判断
+	乘法次数可以用静态局部变量表示
+	括号内的运算次数实现：先将字母入栈，判断‘）’，将top2出栈并计算，在入栈
+	*矩阵名为单个字母，可以用26元素数组表示，结构体涵盖行列，结构体数组
+
+
+
+*/
+#include<iostream>
+#include<string>
+#include<stack>
+struct M
+{
+	int a, b;
+	
+};
+using namespace std;
+int main()
+{
+	struct M m[26];
+	stack<struct M> N;
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		string name;
+		cin >> name;
+		int p = name[0] - 'A';
+		cin >> m[p].a;
+		cin >> m[p].b;
+	}
+	//cout << m[0].a;
+	int pa = 0;
+	string enter;
+	cin >> enter;
+	int sum = 0;
+	int l = enter.length();
+	for (int o=0; o < l; o++)
+	{
+		//cout << 111 << endl;
+		if (isalpha(enter[o]))
+		{
+			N.push(m[enter[o] - 'A']);
+		//	cout << o<<" 123"<<endl;
+		}
+		if (enter[o] == ')')
+		{
+			//cout << 444<< endl;
+			M s1 = N.top();
+			//cout << s1.b << endl;
+			N.pop();
+			M s2 = N.top();
+			//cout << s2.a << endl;
+			N.pop();							//先入栈后出栈，先后行列顺序别搞错了
+			if ( s2.b == s1.a)
+			{
+				//cout << 222 << endl;
+				M s3;
+				s3.a = s2.a;
+				//cout << s1.a<<endl;
+				//cout << s1.b << endl;
+				//cout << s2.b << endl;
+				s3.b = s1.b;
+				//cout << s1.a * s1.b * s2.b << endl;
+				sum += s1.a * s1.b * s2.a;
+				N.push(s3);
+			}
+			else
+			{
+				//cout << 333 << endl;
+				pa = 1;
+				break;
+			}
+
+		}
+
+	}
+	if (pa) cout << "error";
+	else
+	{
+		cout << sum;
+	}
+}

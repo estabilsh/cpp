@@ -1,0 +1,37 @@
+#include<iostream>
+#include<stack>
+#include<vector>
+using namespace std;
+int main()
+{
+	int n,i;
+	stack<int> ab;
+	int tag[6];
+	cin >> n;
+	for (i = 1; i <=n; i++)
+	{
+		cin >> tag[i];
+	}
+	int ok = 1, a = 1, b = 1;
+	while (b<n)
+	{
+		if (a == tag[b]) {
+			a++;
+			b++;
+		}
+		else if (!ab.empty() && ab.top() == tag[b]) {
+			ab.pop();
+			b++;
+		}
+		else if(a<=n) 
+		{
+			ab.push(a++);
+		}
+		else
+		{
+			ok = 0;
+			break;
+		}
+	}
+	printf("%s", ok ? "yes" : "no");
+}

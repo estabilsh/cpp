@@ -1,0 +1,100 @@
+/*
+	移动盒子（半成品）
+	思路：双向链表
+		  链表添加删除元素
+		  算奇数位和
+
+
+
+*/
+#include<iostream>
+using namespace std;
+struct M
+{
+	M* front, * next;
+	int n;
+
+}; 
+void one(M* head, int b, int a)
+{
+	M* p, * q, * r, * s,*t;
+	p = head->next;
+	while (p->n!=a)
+	{
+		p = p->next;
+	}
+	
+	if (p->front->n != b)
+	{
+		
+	
+		q = head->next;
+		while (q->n != b)
+		{
+			q = q->next;
+		}
+		
+		r = q;
+		t = p->front;
+		q->front->next = q->next;
+		s = p->front->next;
+		p->front->next = q;
+		q->front = t;
+		q->next = s;
+
+		
+
+
+	}
+}
+int main()
+{
+	int a;
+	cin >> a;
+	M* head, * tail, * p;
+	head = new M;
+	tail = head;
+	tail->front = NULL;
+	tail->next = NULL;
+
+	for (int i = 0; i < a; i++)
+	{
+		p = new M;
+		tail->next = p;
+		p->front = tail;
+		tail = p;
+		p->next = NULL;
+		p->n = i + 1;
+	}
+	int b;
+	cin >> b;
+	for (int c = 0; c < b; c++)
+	{
+		int d,e,f;
+		cin >> d;
+		switch (d)
+		{
+		case 1:
+		{
+			
+			cin >> e;
+			cin >> f;
+			one(head, e, f);
+
+		}
+		default:
+			break;
+		}
+	}
+	p =head->next;
+	int l = 1,sum=0;
+	while (p!= NULL)
+	{
+		if(l%2==1) sum+= p->n;
+		cout << p->n;
+		cout << sum << endl;
+		p = p->next;
+		l++;
+	}
+	cout << sum;
+}
