@@ -1,0 +1,12 @@
+bool isprime(int a)
+{
+	int sum = 0;
+	int i;
+	for (i=1; i < a; i++)
+	{
+		if ((a % i) == 0)	sum++;
+
+	}
+	if (sum == 1) return 1;
+	else return 0;
+}
