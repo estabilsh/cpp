@@ -1,0 +1,45 @@
+/*
+	八皇后问题：
+		递归进行，将数组下表作为行数，数值作为列数，判断列中以及对角线是否有皇后
+
+
+
+*/
+#include<iostream>
+int n = 8;
+int sum = 0;
+int C[8];
+using namespace std;
+void search(int cur)
+{
+	if (cur == n)
+	{
+		sum++;
+	}
+	else
+	{
+
+		for (int i = 0; i < n; i++)
+		{
+			int ok = 1;
+			C[cur] = i;
+			for (int p = 0; p < cur; p++)
+			{
+				if (C[cur] == C[p] || (cur + C[cur]) == (p + C[p]) || (cur - C[cur]) == (p - C[p]))//列，主对角线，副对角线
+				{
+					ok = 0;
+					break;
+				}
+
+			}
+			if (ok) search(cur + 1);
+		}
+
+	}
+}
+
+int main()
+{
+	search(0);
+	cout << sum;
+}
