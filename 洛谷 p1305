@@ -1,0 +1,73 @@
+## **题目描述**
+
+输入一串二叉树，输出其前序遍历。
+
+## **输入格式**
+
+第一行为二叉树的节点数 n*n*。(1 \leq n \leq 261≤*n*≤26)
+
+后面 n*n* 行，每一个字母为节点，后两个字母分别为其左右儿子。
+
+空节点用 `*` 表示
+
+## **输出格式**
+
+二叉树的前序遍历。
+
+## **输入输出样例**
+
+**输入 #1**复制
+
+`6
+abc
+bdi
+cj*
+d**
+i**
+j**`
+
+**输出 #1**复制
+
+`abdicj`
+
+思路：
+
+前序遍历即为子节点、左节点、右节点
+
+与输入方式相同
+
+删去主字符串中输入字符串的根并把输入字符串加入
+
+输出时略过*
+
+```jsx
+//
+
+#include<iostream>
+#include<cstring>
+#include<string>
+using namespace std;
+
+int main()
+{
+	int n;
+	string b;
+	cin >> n;
+	cin >> b;
+	for (int i = 1; i < n; i++)
+	{
+		string ss;
+		cin >> ss;
+		int x = b.find(ss[0]);
+		b.erase(x, 1);
+		b.insert(x, ss);
+
+	}
+	for (int i = 0; i < b.size(); i++)
+	{
+		if (b[i] != '*') cout << b[i];
+
+	}
+
+}
+```
